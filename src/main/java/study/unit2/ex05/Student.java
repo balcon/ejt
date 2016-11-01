@@ -28,7 +28,10 @@ public class Student {
         return result;
     }
 
-    public String getFullName(){
-        return firstName+" "+lastName;
+    public void showMarks(Group<?>... groups) {
+        System.out.println(firstName+" "+lastName+":");
+        for (Group<?> group : groups) {
+            group.showMarks(this);
+        }
     }
 }

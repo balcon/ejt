@@ -1,17 +1,20 @@
 package study.unit2.ex05;
 
-enum Subject {
-    CHEMESTRY,
+public enum Subject {
+    CHEMISTRY,
     MATH,
-    PHYSIC;
+    PHYSICS;
 
-    public boolean isDouble(){
-        switch(this)
-        {
+    public String toString() {
+        switch (this) {
+            case CHEMISTRY:
+                return "chemistry";
             case MATH:
-                return true;
+                return "math";
+            case PHYSICS:
+                return "physics";
             default:
-                return false;
+                return "";
         }
     }
 }
