@@ -47,7 +47,7 @@ public class MovieCollectionTest {
 
     @Test
     public void removeMove() throws Exception {
-        System.out.println("Removing movie");
+        System.out.println("Remove movie");
         movieCollection1.removeMovie("Forrest Gump");
         System.out.println(movieCollection1);
 

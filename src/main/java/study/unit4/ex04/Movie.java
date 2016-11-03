@@ -34,6 +34,6 @@ public class Movie implements Serializable {
                 ", country='" + country + '\'' +
                 ", year=" + year +
                 ", actors=" + actors +
-                "}\n";
+                "}";
     }
 }

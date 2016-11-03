@@ -6,6 +6,7 @@ import java.util.*;
 public class Group<T extends Number> {
     private Subject subject;
     private Map<Student, List<T>> marks;
+
     public Group(Subject subject) {
         this.subject = subject;
         marks = new HashMap<>();
@@ -22,17 +23,21 @@ public class Group<T extends Number> {
 
     public void showMarks(Student student) {
         if (marks.containsKey(student)) {
-            System.out.print("Group "+subject+": ");
+            System.out.print("Group " + subject + ": ");
             System.out.print(marks.get(student));
-            System.out.println(gpa(marks.get(student).toArray()));
+            System.out.println(" GPA: "+gpa(marks.get(student)));
         }
     }
-/*
-    private double gpa(Object[] values){
-        double sum=0;
-        for (Double value :db) {
-            sum+=value;
+
+    private Double gpa(List<T> marks){
+        Double summ=0D;
+        for (T mark : marks) {
+            summ+=mark.doubleValue();
         }
-        return sum/values.length;
-    }*/
+        summ/=marks.size();
+        return summ;
+
+    }
+
+
 }

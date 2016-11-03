@@ -7,11 +7,7 @@ import java.util.List;
 public class MovieCollection implements Serializable {
     private static final long serialVersionUID = 1716063777838096999L;
 
-    List<Movie> movies = new ArrayList<>();// TODO: 31.10.2016 change List to Set
-
-    public MovieCollection() {
-
-    }
+    private final List<Movie> movies = new ArrayList<>();// TODO: 31.10.2016 change List to Set
 
     public static MovieCollection deserializeFrom(String filePath) throws IOException, ClassNotFoundException {
         MovieCollection movieCollection;
@@ -42,7 +38,7 @@ public class MovieCollection implements Serializable {
 
     public void removeMovie(String movieName) {
         for (int i = 0; i < movies.size(); i++) {
-            if(movies.get(i).getName()==movieName){ // TODO: 31.10.2016 Use your brain!
+            if(movies.get(i).getName()==movieName){
                 movies.remove(i);
             }
         }
@@ -51,6 +47,11 @@ public class MovieCollection implements Serializable {
 
     @Override
     public String toString() {
-        return movies.toString();
+        StringBuilder stringBuilder= new StringBuilder();
+        for (Movie movie : movies) {
+            stringBuilder.append(movie.toString());
+            stringBuilder.append(System.lineSeparator());
+        }
+        return  stringBuilder.toString();
     }
 }
