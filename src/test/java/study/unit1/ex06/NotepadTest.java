@@ -2,13 +2,12 @@ package study.unit1.ex06;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.junit.Assert.*;
 
 public class NotepadTest {
 
-    NoteBook redBook=new NoteBook(3);
+    NoteBook redBook = new NoteBook(3);
+
     @Test
     public void test() {
 

@@ -2,18 +2,20 @@ package study.unit2.ex01;
 
 public class Pen {
 
-    enum Color{RED,GREEN,BLACK,BLUE};
+    enum Color {RED, GREEN, BLACK, BLUE}
+
+    ;
     private final Color color;
     private final String manufacturer;
 
-    Pen(){
-        color=Color.BLUE;
-        manufacturer="NoName";
+    Pen() {
+        color = Color.BLUE;
+        manufacturer = "NoName";
     }
 
-    Pen (Color color){
-        this.color=color;
-        manufacturer="NoName";
+    Pen(Color color) {
+        this.color = color;
+        manufacturer = "NoName";
     }
 
     public Pen(Color color, String manufacturer) {
@@ -42,6 +44,6 @@ public class Pen {
 
     @Override
     public String toString() {
-        return "Pen{"+"color="+color+", manufacturer=\"" + manufacturer + "\"} ["+hashCode()+"]";
+        return "Pen{" + "color=" + color + ", manufacturer=\"" + manufacturer + "\"} [" + hashCode() + "]";
     }
 }

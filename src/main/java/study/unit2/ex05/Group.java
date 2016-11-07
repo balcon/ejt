@@ -25,16 +25,16 @@ public class Group<T extends Number> {
         if (marks.containsKey(student)) {
             System.out.print("Group " + subject + ": ");
             System.out.print(marks.get(student));
-            System.out.println(" GPA: "+gpa(marks.get(student)));
+            System.out.println(" GPA: " + gpa(marks.get(student)));
         }
     }
 
-    private Double gpa(List<T> marks){
-        Double summ=0D;
+    private Double gpa(List<T> marks) {
+        Double summ = 0D;
         for (T mark : marks) {
-            summ+=mark.doubleValue();
+            summ += mark.doubleValue();
         }
-        summ/=marks.size();
+        summ /= marks.size();
         return summ;
 
     }

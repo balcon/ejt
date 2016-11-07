@@ -1,7 +1,5 @@
 package study.unit2.ex02;
 
-import java.util.ArrayList;
-
 class Stationery {
 
     private final String type;

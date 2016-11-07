@@ -8,15 +8,15 @@ class Note {
 
     private String text;
 
-    Note(String text){
-        this.text=text;
+    Note(String text) {
+        this.text = text;
     }
 
-    void setText(String text){
-        this.text=text;
+    void setText(String text) {
+        this.text = text;
     }
 
-    String getText(){
+    String getText() {
 
         return text;
     }

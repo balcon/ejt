@@ -3,7 +3,8 @@ package study.unit2.ex03;
 
 public class Notepad extends Stationery {
 
-    public enum SheetSize{A4,A5,A6}
+    public enum SheetSize {A4, A5, A6}
+
     private final SheetSize sheetSize;
     private final int sheetsNumber;
 
@@ -17,8 +18,6 @@ public class Notepad extends Stationery {
     public String getName() {
         return "Notepad";
     }
-
-
 
 
 }

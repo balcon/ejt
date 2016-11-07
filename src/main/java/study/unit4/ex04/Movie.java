@@ -6,8 +6,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Movie implements Serializable {
-    private static final long serialVersionUID = 1279987595383209241L;
-
     private String name;
     private String country;
     private int year;
@@ -24,7 +22,7 @@ public class Movie implements Serializable {
     }
 
     public void addActors(String... actor) {
-        Collections.addAll(this.actors,actor);
+        Collections.addAll(this.actors, actor);
     }
 
     @Override

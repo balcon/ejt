@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class ReaderWriterTest {
     @Test
     public void ReadFile() throws Exception {
-        String fp=("src\\main\\resources\\study\\unit4\\JavaKeywords.txt");
+        String fp = ("src\\main\\resources\\study\\unit4\\JavaKeywords.txt");
         Keywords keywords = new Keywords(fp);
         assertTrue(keywords.contains("int"));
 

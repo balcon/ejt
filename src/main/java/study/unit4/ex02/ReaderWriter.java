@@ -15,6 +15,7 @@ public class ReaderWriter {
         }
         return stringBuilder.toString().split("[\\s{}()./*\\[\\];!=\\\"]+");
     }
+
     static void writeTo(String string, String filePath) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(string);

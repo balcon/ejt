@@ -6,7 +6,7 @@ import org.junit.Test;
 public class Ex01Test {
 
     @Test
-    public void test(){
+    public void test() {
         CrazyLogger crazyLogger = new CrazyLogger();
 
         crazyLogger.log("first log");

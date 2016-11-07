@@ -1,8 +1,9 @@
 package study.unit2.ex03;
 
 
-public class Stapler extends Stationery{
-    public enum BracketSize{SMALL,MEDIUM}
+public class Stapler extends Stationery {
+    public enum BracketSize {SMALL, MEDIUM}
+
     private final BracketSize bracketSize;
 
     public Stapler(double price, String manufacturer, BracketSize bracketSize) {

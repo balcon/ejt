@@ -29,7 +29,7 @@ public class Student {
     }
 
     public void showMarks(Group<?>... groups) {
-        System.out.println(firstName+" "+lastName+":");
+        System.out.println(firstName + " " + lastName + ":");
         for (Group<?> group : groups) {
             group.showMarks(this);
         }

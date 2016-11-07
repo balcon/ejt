@@ -7,5 +7,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface AboutSubmarine {
     String author();
+
     boolean isTrue();
 }

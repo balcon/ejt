@@ -20,6 +20,6 @@ public class IOStreams {
     public static void writeTo(String string, String filePath) throws IOException {
         try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(filePath))) {
             outputStream.write(string.getBytes());
-         }
+        }
     }
 }

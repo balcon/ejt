@@ -2,17 +2,12 @@ package study.unit3.ex02;
 
 import org.junit.Test;
 
-import java.util.Enumeration;
-import java.util.ListResourceBundle;
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 public class Ex02Test {
 
     @Test
-    public void test(){
-        Answerer ansRU=new Answerer("ru");
-        Answerer ansEN=new Answerer("en");
+    public void test() {
+        Answerer ansRU = new Answerer("ru");
+        Answerer ansEN = new Answerer("en");
 
         ansRU.showAllQuestions();
      /* Список вопросов:

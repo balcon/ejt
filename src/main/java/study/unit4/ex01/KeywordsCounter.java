@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class KeywordsCounter
-{
+public class KeywordsCounter {
 
     public static void main(String[] args) {
         String inputPath = "src\\main\\java\\study\\unit4\\ex01\\KeywordsCounter.java";
@@ -16,7 +15,7 @@ public class KeywordsCounter
             String[] contentArray = IOStreams.readFrom(inputPath);
             Map<String, Integer> counters = countKeywordsInContent(keywords, contentArray);
             writeCountersToFile(outputPath, counters);
-        } catch (IOException  e) {
+        } catch (IOException e) {
             System.out.println("File can not be R/W");
         }
     }

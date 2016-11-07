@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class NuclearSubmarineTest {
     @Test
-    public void testSub(){
+    public void testSub() {
 
         NuclearSubmarine goldFish = new NuclearSubmarine();
         goldFish.sailAway();

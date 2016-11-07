@@ -1,6 +1,8 @@
 package study.unit3.ex03;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class FileRW {
@@ -16,8 +18,9 @@ public class FileRW {
         }
         return stringBuilder.toString();
     }
+
     public static void writeTo(String string, String filePath, String codepage) throws IOException {
-        try(PrintWriter pw=new PrintWriter(filePath,codepage)){
+        try (PrintWriter pw = new PrintWriter(filePath, codepage)) {
             pw.write(string);
         }
     }

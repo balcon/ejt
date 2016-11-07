@@ -1,7 +1,5 @@
 package study.unit2.ex02;
 
-import java.util.ArrayList;
-
 class Employee {
 
     private final String firstName;

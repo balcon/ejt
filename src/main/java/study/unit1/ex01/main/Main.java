@@ -1,10 +1,10 @@
 package study.unit1.ex01.main;
 
-import study.unit1.ex01.logic.*;
+import study.unit1.ex01.logic.Logic;
 
-public class Main{
+public class Main {
     public static void main(String[] args) {
-        Logic logic=new Logic();
+        Logic logic = new Logic();
         System.out.println(logic.method());
     }
 }
