@@ -14,9 +14,5 @@ public abstract class Command {
 
     }
 
-    abstract public boolean invalidParameters();
-
     abstract public void execute() throws CommandException;
-
-    abstract public String getErrorMessage();
 }

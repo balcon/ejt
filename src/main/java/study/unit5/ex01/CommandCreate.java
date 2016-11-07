@@ -1,13 +1,12 @@
 package study.unit5.ex01;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class CommandCreate extends Command {
     String[] args;
 
     public CommandCreate(String[] args) throws CommandException {
-        if( args.length < 2) throw new CommandException("Usage: create <single file name>");
+        if (args.length < 2) throw new CommandException("Usage: create <single file name>");
         this.args = args;
     }
 
@@ -22,15 +21,5 @@ public class CommandCreate extends Command {
                 throw new CommandException(String.format("Can't create file [%s]", args[i]));
             }
         }
-    }
-
-    @Override
-    public boolean invalidParameters() {
-        return args.length < 2;
-    }
-
-    @Override
-    public String getErrorMessage() {
-        return "Usage: create <single file name>";
     }
 }

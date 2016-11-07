@@ -20,14 +20,4 @@ public class CommandRead extends Command {
 
         }
     }
-
-    @Override
-    public boolean invalidParameters() {
-        return args.length != 2;
-    }
-
-    @Override
-    public String getErrorMessage() {
-        return "Usage: read <single file name>";
-    }
 }

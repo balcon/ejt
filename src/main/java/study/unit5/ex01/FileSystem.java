@@ -22,7 +22,6 @@ public class FileSystem {
             while (scanner.hasNext()) {
                 stringJoiner.add(scanner.nextLine());
             }
-
         }
         return stringJoiner.toString();
     }
