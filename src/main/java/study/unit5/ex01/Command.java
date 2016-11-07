@@ -8,6 +8,8 @@ public abstract class Command {
                 return new CommandCreate(args);
             case "read":
                 return new CommandRead(args);
+            case "remove":
+                return new CommandRemove(args);
             default:
                 return null;
         }
