@@ -10,7 +10,5 @@ public class PropertyReaderTest {
         PropertyReader propertyReader0 = new PropertyReader("src\\main\\resources\\study\\unit5\\ex02\\exampe.ini");
         PropertyReader propertyReader = new PropertyReader("src\\main\\resources\\study\\unit5\\ex02\\example.ini");
         propertyReader.seeMap();
-
-
     }
 }

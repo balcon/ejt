@@ -6,15 +6,14 @@ public class CommandRead extends Command {
     String[] args;
 
     protected CommandRead(String[] args) throws CommandException {
-        if (args.length != 2) throw new CommandException("Usage: read <single file name>");
+        if (args.length != 2) throw new CommandException("Usage: read <file path>");
         this.args = args;
     }
 
     @Override
     public void execute() throws CommandException {
-        FileSystem fileSystem = new FileSystem();
         try {
-            System.out.print(fileSystem.readFile(args[1]));
+            System.out.print(Command.readFile(args[1]));
         } catch (FileNotFoundException e) {
             throw new CommandException(String.format("File not found [%s]", args[1]));
 

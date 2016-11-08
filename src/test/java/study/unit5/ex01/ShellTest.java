@@ -4,8 +4,7 @@ import org.junit.Test;
 
 import java.io.*;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ShellTest {
 
@@ -28,20 +27,27 @@ public class ShellTest {
     }
 
     private void debug() {
-        System.err.println( terminalMessage());
+        System.err.println(terminalMessage());
     }
 
     @Test
-    public void create() throws Exception {
+    public void createFile() throws Exception {
         String filePath = "C:\\Users\\Balcon\\Documents\\JavaProjects\\ejt\\target\\createTestFile.txt";
         Shell.main("create", filePath);
         assertTrue(new File(filePath).exists());
     }
 
     @Test
+    public void createFileWithBadPath() throws Exception {
+        String filePath = "C:\\Users\\Balcon\\Documents\\JavaProjects\\ejt\\GhostDirectory\\createTestFile.txt";
+        Shell.main("create", filePath);
+        assertEquals(terminalMessage(),String.format("Can't create file [%s]",filePath));
+    }
+
+    @Test
     public void createWithoutFileNameParameter() throws Exception {
         Shell.main("create");
-        assertTrue( terminalMessage().equals("Usage: create <single file name>"));
+        assertTrue(terminalMessage().equals("Usage: create <file path> [,file2 path, ...]"));
     }
 
     @Test
@@ -60,21 +66,21 @@ public class ShellTest {
 
         Shell.main("read", filePath);
 
-        assertTrue( terminalMessage().equals("test string"));
+        assertTrue(terminalMessage().equals("test string"));
     }
 
     @Test
     public void readWithoutFileNameParameter() throws Exception {
         Shell.main("read");
 
-        assertTrue( terminalMessage().equals("Usage: read <single file name>"));
+        assertTrue(terminalMessage().equals("Usage: read <file path>"));
     }
 
     @Test
     public void readWithSuperfluousParameter() throws Exception {
         Shell.main("read", "//path/to/file", "//path/to/file");
 
-        assertTrue( terminalMessage().equals("Usage: read <single file name>"));
+        assertTrue(terminalMessage().equals("Usage: read <file path>"));
     }
 
     @Test
@@ -92,7 +98,7 @@ public class ShellTest {
 
         assertTrue(new File(filePath).exists());
 
-        Shell.main("remove",filePath);
+        Shell.main("remove", filePath);
 
         assertFalse(new File(filePath).exists());
 
@@ -102,10 +108,10 @@ public class ShellTest {
     public void removeManyFiles() throws Exception {
         String filePath1 = "C:\\Users\\Balcon\\Documents\\JavaProjects\\ejt\\target\\removeFileTest1.txt";
         String filePath2 = "C:\\Users\\Balcon\\Documents\\JavaProjects\\ejt\\target\\removeFileTest2.txt";
-        createNewTempFile(filePath1,"");
-        createNewTempFile(filePath2,"");
+        createNewTempFile(filePath1, "");
+        createNewTempFile(filePath2, "");
 
-        Shell.main("remove",filePath1,filePath2);
+        Shell.main("remove", filePath1, filePath2);
 
         assertFalse(new File(filePath1).exists());
         assertFalse(new File(filePath2).exists());
@@ -113,7 +119,26 @@ public class ShellTest {
 
     @Test
     public void removeDirectory() throws Exception {
-        
+        Shell.main("remove", "C:\\Users\\Balcon\\Documents\\JavaProjects\\ejt\\target");
 
+        assertEquals(terminalMessage(), "Can't remove directories");
+    }
+
+    @Test
+    public void removeWihoutFileNameParametr() throws Exception {
+        Shell.main("remove");
+
+        assertEquals(terminalMessage(), "Usage: remove <file path> [,file2 path, ...]");
+    }
+
+    @Test
+    public void appendToFile() throws Exception {
+        String filePath = "C:\\Users\\Balcon\\Documents\\JavaProjects\\ejt\\target\\appendFileTest.txt";
+        createNewTempFile(filePath, "Test text");
+
+        Shell.main("append", filePath, "appended", "text");
+        Shell.main("read", filePath);
+
+        assertEquals(terminalMessage(), "Test text appended text");
     }
 }

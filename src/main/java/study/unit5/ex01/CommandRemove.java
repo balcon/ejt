@@ -6,7 +6,7 @@ public class CommandRemove extends Command {
     String[] args;
 
     public CommandRemove(String[] args) throws CommandException {
-        if (args.length < 2) throw new CommandException("Usage: remove <file path> [,file2 path, file 3 path, ...]");
+        if (args.length < 2) throw new CommandException("Usage: remove <file path> [,file2 path, ...]");
         this.args = args;
     }
 
