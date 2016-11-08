@@ -3,10 +3,10 @@ package study.unit5.ex01;
 import java.io.File;
 import java.io.IOException;
 
-public class CommandCreate extends Command {
+public class CreateCommand extends Command {
     String[] args;
 
-    public CommandCreate(String[] args) throws CommandException {
+    public CreateCommand(String[] args) throws CommandException {
         if (args.length < 2) throw new CommandException("Usage: create <file path> [,file2 path, ...]");
         this.args = args;
     }
@@ -19,7 +19,7 @@ public class CommandCreate extends Command {
                 file.createNewFile();
             } catch (IOException e) {
 
-                throw new CommandException(String.format("Can't create file [%s]", args[i]));
+                throw new CommandException(String.format("Can't create file [%s]", args[i]),e);
             }
         }
     }

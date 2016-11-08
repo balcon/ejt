@@ -13,8 +13,10 @@ public class ShellTest {
     private ByteArrayOutputStream redefineSystemOutput() {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
+        System.setErr(new PrintStream(output));
         return output;
     }
+
 
     private void createNewTempFile(String filePath, String content) throws FileNotFoundException {
         try (PrintWriter printWriter = new PrintWriter(filePath)) {
@@ -22,12 +24,12 @@ public class ShellTest {
         }
     }
 
-    private String terminalMessage() {
+    private String errorMessage() {
         return output.toString();
     }
 
     private void debug() {
-        System.err.println(terminalMessage());
+        System.err.println(errorMessage());
     }
 
 
@@ -42,13 +44,13 @@ public class ShellTest {
     public void createFileWithWrongPath() throws Exception {
         String filePath = "C:\\Users\\Balcon\\Documents\\JavaProjects\\ejt\\GhostDirectory\\createTestFile.txt";
         Shell.main("create", filePath);
-        assertEquals(terminalMessage(), String.format("Can't create file [%s]", filePath));
+        assertEquals(errorMessage(), String.format("Can't create file [%s]", filePath));
     }
 
     @Test
     public void createWithoutFileNameParameter() throws Exception {
         Shell.main("create");
-        assertTrue(terminalMessage().equals("Usage: create <file path> [,file2 path, ...]"));
+        assertTrue(errorMessage().equals("Usage: create <file path> [,file2 path, ...]"));
     }
 
     @Test
@@ -68,28 +70,28 @@ public class ShellTest {
 
         Shell.main("read", filePath);
 
-        assertTrue(terminalMessage().equals("test string"));
+        assertTrue(errorMessage().equals("test string"));
     }
 
     @Test
     public void readFileWithWrongPath() throws Exception {
         String filePath = "C:\\Users\\blahblahblah.txt";
         Shell.main("read", filePath);
-        assertEquals(terminalMessage(), String.format("Can't read file [%s]", filePath));
+        assertEquals(errorMessage(), String.format("File not found [%s]", filePath));
     }
 
     @Test
     public void readWithoutFileNameParameter() throws Exception {
         Shell.main("read");
 
-        assertTrue(terminalMessage().equals("Usage: read <file path>"));
+        assertTrue(errorMessage().equals("Usage: read <file path>"));
     }
 
     @Test
     public void readWithSuperfluousParameter() throws Exception {
         Shell.main("read", "//path/to/file", "//path/to/file");
 
-        assertTrue(terminalMessage().equals("Usage: read <file path>"));
+        assertTrue(errorMessage().equals("Usage: read <file path>"));
     }
 
 
@@ -110,7 +112,7 @@ public class ShellTest {
     public void removeFileWithWrongPath() throws Exception {
         String filePath = "C:\\Users\\blahblahblah.txt";
         Shell.main("remove", filePath);
-        assertEquals(terminalMessage(),String.format("Can't remove file [%s]",filePath));
+        assertEquals(errorMessage(),String.format("Can't remove file [%s]",filePath));
     }
 
     @Test
@@ -130,14 +132,14 @@ public class ShellTest {
     public void removeDirectory() throws Exception {
         Shell.main("remove", "C:\\Users\\Balcon\\Documents\\JavaProjects\\ejt\\target");
 
-        assertEquals(terminalMessage(), "Can't remove directories");
+        assertEquals(errorMessage(), "Can't remove directories");
     }
 
     @Test
     public void removeWihoutFileNameParametr() throws Exception {
         Shell.main("remove");
 
-        assertEquals(terminalMessage(), "Usage: remove <file path> [,file2 path, ...]");
+        assertEquals(errorMessage(), "Usage: remove <file path> [,file2 path, ...]");
     }
 
     @Test
@@ -148,6 +150,24 @@ public class ShellTest {
         Shell.main("append", filePath, "appended", "text");
         Shell.main("read", filePath);
 
-        assertEquals(terminalMessage(), "Test text appended text");
+        assertEquals(errorMessage(), "Test text appended text");
+    }
+
+    @Test
+    public void appendToFileWithWrongPath() throws Exception {
+        String filePath="c:\\Users\\blahblahblah.txt";
+
+        Shell.main("append",filePath,"appended text");
+
+        assertEquals(errorMessage(), String.format("File not found [%s]",filePath));
+    }
+
+    @Test
+    public void appendToFileWithoutFilepath() throws Exception {
+
+        Shell.main("append");
+
+        assertEquals(errorMessage(),"Usage: append <file path> <appended string>");
+
     }
 }

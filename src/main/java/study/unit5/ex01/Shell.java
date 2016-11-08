@@ -7,7 +7,7 @@ public class Shell {
             command = Command.createCommand(args);
             command.execute();
         } catch (CommandException e) {
-            System.out.print(e.getMessage());
+            System.err.print(e.getMessage());
         }
     }
 }

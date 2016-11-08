@@ -2,10 +2,10 @@ package study.unit5.ex01;
 
 import java.io.File;
 
-public class CommandRemove extends Command {
+public class RemoveCommand extends Command {
     String[] args;
 
-    public CommandRemove(String[] args) throws CommandException {
+    public RemoveCommand(String[] args) throws CommandException {
         if (args.length < 2) throw new CommandException("Usage: remove <file path> [,file2 path, ...]");
         this.args = args;
     }
