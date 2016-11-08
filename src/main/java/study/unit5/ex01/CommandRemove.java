@@ -17,8 +17,11 @@ public class CommandRemove extends Command {
             File file = new File(args[i]);
             if (file.isDirectory()) {
                 throw new CommandException("Can't remove directories");
-            } else
-                file.delete();
+            } else if (!file.delete()) {
+                throw new CommandException(String.format("Can't remove file [%s]", args[i]));
+
+            }
         }
+
     }
 }

@@ -30,6 +30,7 @@ public class ShellTest {
         System.err.println(terminalMessage());
     }
 
+
     @Test
     public void createFile() throws Exception {
         String filePath = "C:\\Users\\Balcon\\Documents\\JavaProjects\\ejt\\target\\createTestFile.txt";
@@ -38,10 +39,10 @@ public class ShellTest {
     }
 
     @Test
-    public void createFileWithBadPath() throws Exception {
+    public void createFileWithWrongPath() throws Exception {
         String filePath = "C:\\Users\\Balcon\\Documents\\JavaProjects\\ejt\\GhostDirectory\\createTestFile.txt";
         Shell.main("create", filePath);
-        assertEquals(terminalMessage(),String.format("Can't create file [%s]",filePath));
+        assertEquals(terminalMessage(), String.format("Can't create file [%s]", filePath));
     }
 
     @Test
@@ -59,6 +60,7 @@ public class ShellTest {
         assertTrue(new File(directory + "createFile2.txt").exists());
     }
 
+
     @Test
     public void readFile() throws Exception {
         String filePath = "C:\\Users\\Balcon\\Documents\\JavaProjects\\ejt\\target\\readFileTest.txt";
@@ -67,6 +69,13 @@ public class ShellTest {
         Shell.main("read", filePath);
 
         assertTrue(terminalMessage().equals("test string"));
+    }
+
+    @Test
+    public void readFileWithWrongPath() throws Exception {
+        String filePath = "C:\\Users\\blahblahblah.txt";
+        Shell.main("read", filePath);
+        assertEquals(terminalMessage(), String.format("Can't read file [%s]", filePath));
     }
 
     @Test
@@ -83,13 +92,6 @@ public class ShellTest {
         assertTrue(terminalMessage().equals("Usage: read <file path>"));
     }
 
-    @Test
-    public void readUnexistentFile() throws Exception {
-        String filePath = "\\anyDirectory\\anyFile.txt";
-        Shell.main("read", filePath);
-
-        assertTrue(terminalMessage().equals(String.format("File not found [%s]", filePath)));
-    }
 
     @Test
     public void removeFile() throws Exception {
@@ -102,6 +104,13 @@ public class ShellTest {
 
         assertFalse(new File(filePath).exists());
 
+    }
+
+    @Test
+    public void removeFileWithWrongPath() throws Exception {
+        String filePath = "C:\\Users\\blahblahblah.txt";
+        Shell.main("remove", filePath);
+        assertEquals(terminalMessage(),String.format("Can't remove file [%s]",filePath));
     }
 
     @Test

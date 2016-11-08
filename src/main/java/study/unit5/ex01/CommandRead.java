@@ -15,7 +15,7 @@ public class CommandRead extends Command {
         try {
             System.out.print(Command.readFile(args[1]));
         } catch (FileNotFoundException e) {
-            throw new CommandException(String.format("File not found [%s]", args[1]));
+            throw new CommandException(String.format("Can't read file [%s]", args[1]));
 
         }
     }
