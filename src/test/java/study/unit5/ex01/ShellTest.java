@@ -112,7 +112,7 @@ public class ShellTest {
     public void removeFileWithWrongPath() throws Exception {
         String filePath = "C:\\Users\\blahblahblah.txt";
         Shell.main("remove", filePath);
-        assertEquals(errorMessage(),String.format("Can't remove file [%s]",filePath));
+        assertEquals(errorMessage(), String.format("Can't remove file [%s]", filePath));
     }
 
     @Test
@@ -155,19 +155,24 @@ public class ShellTest {
 
     @Test
     public void appendToFileWithWrongPath() throws Exception {
-        String filePath="c:\\Users\\blahblahblah.txt";
+        String filePath = "c:\\Users\\blahblahblah.txt";
 
-        Shell.main("append",filePath,"appended text");
+        Shell.main("append", filePath, "appended text");
 
-        assertEquals(errorMessage(), String.format("File not found [%s]",filePath));
+        assertEquals(errorMessage(), String.format("File not found [%s]", filePath));
     }
 
     @Test
     public void appendToFileWithoutFilepath() throws Exception {
-
         Shell.main("append");
 
-        assertEquals(errorMessage(),"Usage: append <file path> <appended string>");
+        assertEquals(errorMessage(), "Usage: append <file path> <appended string>");
+    }
 
+    @Test
+    public void unknownCommand() throws Exception {
+        Shell.main("dosomething");
+
+        assertEquals(errorMessage(), "Unknown command [dosomething]");
     }
 }

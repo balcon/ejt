@@ -13,8 +13,8 @@ public abstract class Command {
             case "append":
                 return new AppendCommand(args);
             default:
-                return null;
-        }
+                throw new CommandException(String.format("Unknown command [%s]",args[0]));
+        }//// TODO: 10.11.2016 create directory viewer
 
     }
 
