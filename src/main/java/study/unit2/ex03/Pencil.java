@@ -1,8 +1,6 @@
 package study.unit2.ex03;
 
 public class Pencil extends Writings {
-
-
     public enum Hardness {H, HB, B}
 
     private final Hardness hardness;

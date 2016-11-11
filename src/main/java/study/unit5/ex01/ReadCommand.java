@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class ReadCommand extends Command {
-    String[] args;
+    private final String[] args;
 
     protected ReadCommand(String[] args) throws CommandException {
         if (args.length != 2) throw new CommandException("Usage: read <file path>");
@@ -14,7 +14,7 @@ public class ReadCommand extends Command {
     }
 
     @Override
-    public void execute() throws CommandException {
+    public void execute() throws FileNotFoundException {
 
         File file = new File(args[1]);
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
@@ -22,9 +22,9 @@ public class ReadCommand extends Command {
             while (scanner.hasNext()) {
                 stringJoiner.add(scanner.nextLine());
             }
-            System.out.print(stringJoiner.toString());
+            System.out.println(stringJoiner.toString());
         } catch (FileNotFoundException e) {
-            throw new CommandException(String.format("File not found [%s]", args[1]),e);
+            throw new FileNotFoundException(String.format("File not found [%s]", args[1]));
         }
 
     }

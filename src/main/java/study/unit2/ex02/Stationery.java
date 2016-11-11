@@ -1,10 +1,8 @@
 package study.unit2.ex02;
 
 class Stationery {
-
     private final String type;
     private final int price;
-
 
     public Stationery(String type, int price) {
 

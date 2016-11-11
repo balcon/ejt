@@ -5,39 +5,35 @@ import java.util.*;
 
 public class Group<T extends Number> {
     private Subject subject;
-    private Map<Student, List<T>> marks;
+    private Map<Student, List<T>> points;
 
     public Group(Subject subject) {
         this.subject = subject;
-        marks = new HashMap<>();
+        points = new HashMap<>();
     }
 
     public void addStudent(Student student) {
-        marks.put(student, new ArrayList<>());
+        points.put(student, new ArrayList<>());
     }
 
-    public void addMarks(Student student, T... marks) {
-        Collections.addAll(this.marks.get(student), marks);
+    public void addMarks(Student student, T... points) {
+        Collections.addAll(this.points.get(student), points);
     }
-
 
     public void showMarks(Student student) {
-        if (marks.containsKey(student)) {
+        if (points.containsKey(student)) {
             System.out.print("Group " + subject + ": ");
-            System.out.print(marks.get(student));
-            System.out.println(" GPA: " + gpa(marks.get(student)));
+            System.out.print(points.get(student));
+            System.out.println(" GPA: " + average(points.get(student)));
         }
     }
 
-    private Double gpa(List<T> marks) {
+    private Double average(List<T> points) {
         Double summ = 0D;
-        for (T mark : marks) {
-            summ += mark.doubleValue();
+        for (T point : points) {
+            summ += point.doubleValue();
         }
-        summ /= marks.size();
+        summ /= points.size();
         return summ;
-
     }
-
-
 }

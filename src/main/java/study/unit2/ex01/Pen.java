@@ -2,9 +2,13 @@ package study.unit2.ex01;
 
 public class Pen {
 
-    enum Color {RED, GREEN, BLACK, BLUE}
+    enum Color {
+        RED,
+        GREEN,
+        BLACK,
+        BLUE,
+    }
 
-    ;
     private final Color color;
     private final String manufacturer;
 

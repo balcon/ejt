@@ -13,17 +13,16 @@ public class PropertyReader {
     }
 
     private void readValue(String filePath, String key) throws IOException {
-        Properties property = new Properties();
         try (FileReader fileReader = new FileReader(filePath)) {
+            Properties property = new Properties();
             property.load(fileReader);
             if (!property.containsKey(key)) {
                 throw new KeyNotFoundException(String.format("Unavailable key [%s]", key));
             } else {
                 value = property.getProperty(key);
             }
-        }
-        catch (FileNotFoundException e){
-            throw new FileNotFoundException(String.format("File not found [%s]",filePath));
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException(String.format("File not found [%s]", filePath));
         }
 
 

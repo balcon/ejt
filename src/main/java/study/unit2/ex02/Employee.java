@@ -1,7 +1,6 @@
 package study.unit2.ex02;
 
 class Employee {
-
     private final String firstName;
     private final String secondName;
 

@@ -15,17 +15,17 @@ public class AppendCommand extends Command {
     }
 
     @Override
-    public void execute() throws CommandException {
+    public void execute() throws IOException {
         StringJoiner appendedText = new StringJoiner(" ");
         for (int i = 2; i < args.length; i++) {
             appendedText.add(args[i]);
         }
         try (PrintWriter printWriter = new PrintWriter(new FileWriter(args[1], true))) {
             printWriter.write(" " + appendedText.toString());
-        } catch (FileNotFoundException e){
-            throw new CommandException(String.format("File not found [%s]", args[1]),e);
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException(String.format("File not found [%s]", args[1]));
         } catch (IOException e) {
-            throw new CommandException(String.format("Can't append to file [%s]", args[1]),e);
+            throw new IOException(String.format("Can't append to file [%s]", args[1]));
         }
     }
 }

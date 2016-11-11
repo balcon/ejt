@@ -13,7 +13,6 @@ public class IOStreams {
                 data = inputStream.read();
             }
         }
-
         return stringBuilder.toString().split("[\\s{}()./*\\[\\];!=\\\"]+");
     }
 

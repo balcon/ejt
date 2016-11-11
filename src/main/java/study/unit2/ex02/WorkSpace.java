@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class WorkSpace {
-
     private final Employee employee;
-
     private final List<Stationery> stuff = new ArrayList<>();
 
     public WorkSpace(Employee employee) {
@@ -33,5 +31,4 @@ class WorkSpace {
         }
         return totalPrice;
     }
-
 }
