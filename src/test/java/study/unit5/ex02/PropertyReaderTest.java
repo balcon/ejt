@@ -11,19 +11,20 @@ public class PropertyReaderTest {
 
     @Test
     public void getExistingValue() throws Exception {
-        PropertyReader propertyReader = new PropertyReader(filePath, "db.user");
+        PropertyReader propertyReader = new PropertyReader(filePath);
 
-        assertEquals(propertyReader.getValue(), "sa");
+        assertEquals(propertyReader.getValue("db.user"), "sa");
     }
 
     @Test(expected = FileNotFoundException.class)
     public void readWithWrongFilePath() throws Exception {
         String filePath = "c:\\ghostfile.properties";
-            PropertyReader propertyReader = new PropertyReader(filePath, "db.user");
+        PropertyReader propertyReader = new PropertyReader(filePath);
     }
 
     @Test(expected = KeyNotFoundException.class)
     public void readWithWrongKey() throws Exception {
-            PropertyReader propertyReader = new PropertyReader(filePath, "db.wrong");
+        PropertyReader propertyReader = new PropertyReader(filePath);
+        propertyReader.getValue("wrongKey");
     }
 }

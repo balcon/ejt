@@ -2,19 +2,23 @@ package study.unit7.ex01;
 
 public class Account {
     private int balance;
+    private static int id = 0;
+    private int accountId = 0;
 
     public Account(int balance) {
-        this.balance=balance;
+
+        this.balance = balance;
     }
 
-    public void deposit(int coins) {
-        balance+=coins;
-    }
-    public int getBalance(){
+    public int getBalance() {
         return balance;
     }
 
-    public void withdraw(int coins) {
-        balance-=coins;
+    public void deposit(int amount) {
+        balance += amount;
+    }
+
+    public void withdraw(int amount) {
+        balance -= amount;
     }
 }

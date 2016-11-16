@@ -6,29 +6,20 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertyReader {
-    private String value = "";
+    private final Properties properties;
 
-    public PropertyReader(String filePath, String key) throws IOException {
-        readValue(filePath, key);
-    }
-
-    private void readValue(String filePath, String key) throws IOException {
+    public PropertyReader(String filePath) throws IOException {
+        properties = new Properties();
         try (FileReader fileReader = new FileReader(filePath)) {
-            Properties property = new Properties();
-            property.load(fileReader);
-            if (!property.containsKey(key)) {
-                throw new KeyNotFoundException(String.format("Unavailable key [%s]", key));
-            } else {
-                value = property.getProperty(key);
-            }
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException(String.format("File not found [%s]", filePath));
+            properties.load(fileReader);
         }
-
-
     }
 
-    public String getValue() {
-        return value;
+    public String getValue(String key) throws KeyNotFoundException {
+        if (!properties.containsKey(key)) {
+            throw new KeyNotFoundException(String.format("Unavailable key [%s]", key));
+        } else {
+            return properties.getProperty(key);
+        }
     }
 }
