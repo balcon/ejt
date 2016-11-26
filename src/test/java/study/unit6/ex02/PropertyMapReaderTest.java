@@ -9,7 +9,6 @@ public class PropertyMapReaderTest {
 
     @Test
     public void testReadPropertyFile() throws Exception {
-
         PropertyMapReader propertyMapReader = new PropertyMapReader(filePath);
 
         assertEquals(propertyMapReader.getSize(),5);
@@ -17,10 +16,8 @@ public class PropertyMapReaderTest {
 
     @Test
     public void testGetValue() throws Exception {
-
         PropertyMapReader propertyMapReader = new PropertyMapReader(filePath);
 
         assertEquals(propertyMapReader.getValue("db.user"),"sa");
-
     }
 }

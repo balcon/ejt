@@ -1,0 +1,18 @@
+class MedicalStaff{}
+class Doctor extends MedicalStaff{}
+class Nurse extends MedicalStaff{}
+class HeadDoctor extends Doctor{}
+
+Doctor doctor1 = new Doctor();          correct
+Doctor doctor2 = new MedicalStaff();    incorrect   MedicalStuff не является наследником Doctor
+Doctor doctor3 = new HeadDoctor();      correct     HeadDoctor является наследником Doctor
+Object object1 = new HeadDoctor();      correct     HeadDoctor является наследником Object
+HeadDoctor doctor5 = new Object();      incorrect   Object не является наследником HeadDoctor
+Doctor doctor6 = new Nurse();           incorrect   Nurse не является наследником Doctor
+Nurse nurse = new Doctor();             incorrect   Doctor не является наследником Nurse
+Object object2 = new Nurse();           correct     Nurse является наследником Object
+List<Doctor> list1= new ArrayList<Doctor>();        correct
+List<MedicalStaff> list2 = new ArrayList<Doctor>(); incorrect   несоответсвие generic-типов
+List<Doctor> list3 = new ArrayList<MedicalStaff>(); incorrect   несоответсвие generic-типов
+List<Object> list4 = new ArrayList<Doctor>();       incorrect   несоответсвие generic-типов
+List<Object> list5 = new ArrayList<Object>();       correct

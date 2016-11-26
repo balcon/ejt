@@ -2,12 +2,11 @@ package study.unit7.ex01;
 
 public class Account {
     private int balance;
-    private static int id = 0;
-    private int accountId = 0;
+    private int accountId;
 
-    public Account(int balance) {
-
+    public Account(int accountId, int balance) {
         this.balance = balance;
+        this.accountId=accountId;
     }
 
     public int getBalance() {
@@ -20,5 +19,9 @@ public class Account {
 
     public void withdraw(int amount) {
         balance -= amount;
+    }
+
+    public int getAccountId() {
+        return accountId;
     }
 }

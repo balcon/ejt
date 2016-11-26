@@ -5,9 +5,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class AccountTest {
+    Account account = new Account(1, 100);
     @Test
     public void testDeposit() throws Exception {
-        Account account = new Account(100);
         account.deposit(50);
 
         assertEquals(account.getBalance(), 150);
@@ -15,7 +15,6 @@ public class AccountTest {
 
     @Test
     public void testWithdraw() throws Exception {
-        Account account = new Account(100);
         account.withdraw(50);
 
         assertEquals(account.getBalance(), 50);

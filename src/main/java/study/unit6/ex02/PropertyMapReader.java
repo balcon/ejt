@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Properties;
 
 public class PropertyMapReader {
-    Map<String,String> mapStorage=new HashMap<>();
+    private final Map<String,String> mapStorage=new HashMap<>();
 
     public PropertyMapReader(String filePath) throws IOException {
         try (FileReader fileReader = new FileReader(filePath)) {
