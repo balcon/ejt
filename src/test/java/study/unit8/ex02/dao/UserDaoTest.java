@@ -5,6 +5,7 @@ import org.junit.Test;
 import study.unit8.ex02.User;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,14 +18,15 @@ public class UserDaoTest {
 
     @BeforeClass
     public static void createUserTable() throws Exception {
-        try (Connection connection = DaoFactory.getConnection()) {
+        try (Connection connection = DriverManager.getConnection("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1")) {
             connection.createStatement().execute(
                     "CREATE TABLE users (" +
-                            "user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
+                            "user_id INT NOT NULL PRIMARY KEY," +
                             "name varchar(255) NOT NULL," +
                             "phone varchar(20) NOT NULL);");
             connection.createStatement().execute(
-                    "INSERT INTO users (name,phone) VALUES ('User0','123-45-67');");
+                    "INSERT INTO users (user_id,name,phone) VALUES (0,'User0','123-45-67');" +
+                            "INSERT INTO users (user_id,name,phone) VALUES (1,'User1','234-56-78');");
         }
     }
 
@@ -32,7 +34,7 @@ public class UserDaoTest {
 
     @Test
     public void testCreateUser() throws Exception {
-        User user = new User("user1", "123-45-67");
+        User user = new User(2, "Anonymous", "345-67-89");
         int result = userDao.createUser(user);
         assertEquals(result, 1);
     }
@@ -43,9 +45,20 @@ public class UserDaoTest {
         assertFalse(users.isEmpty());
     }
 
+    @Test
+    public void getUserById() throws Exception {
+        User user=userDao.getById(0);
+        assertEquals(user.getName(),"User0");
+    }
 
+    @Test(expected = RuntimeException.class)
+    public void getUserByWrongId() throws Exception {
+        userDao.getById(9000);
+    }
 
-
-
-
+    @Test
+    public void getUserListByName() throws Exception {
+        List<User> users=userDao.getByName("user");
+        assertEquals(users.size(),2);
+    }
 }

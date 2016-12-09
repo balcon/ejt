@@ -8,9 +8,10 @@ public class UserTest {
 
     @Test
     public void testUserConstructor() throws Exception {
-        User user = new User("User1", "123-45-67");
+        User user = new User(1, "User1", "123-45-67");
 
-        assertEquals("User1",user.getName());
-        assertEquals("123-45-67",user.getPhone());
+        assertEquals(user.getId(),1);
+        assertEquals(user.getName(),"User1");
+        assertEquals(user.getPhone(),"123-45-67");
     }
 }
