@@ -8,10 +8,10 @@ public class BookTest {
 
     @Test
     public void testBookConstructor() throws Exception {
-        Book book = new Book("Foundation", "Isaac Asimov", 1951);
+        Book book = new Book("book1", "author1", 1950);
 
-        assertEquals("Foundation",book.getName());
-        assertEquals("Isaac Asimov",book.getAuthor());
-        assertEquals(1951,book.getYear());
+        assertEquals("book1",book.getName());
+        assertEquals("author1",book.getAuthor());
+        assertEquals(1950,book.getYear());
     }
 }

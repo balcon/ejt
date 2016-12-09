@@ -1,14 +1,22 @@
 package study.unit8.ex02.dao;
 
 import study.unit8.ex02.Book;
+import study.unit8.ex02.connections.ConnectionPool;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookDao {
-    public int createBook(Book book) throws SQLException, ClassNotFoundException {
-        try (Connection connection = DaoFactory.getConnection()) {
+
+    ConnectionPool connectionPool;
+
+    public BookDao(ConnectionPool connectionPool) {
+        this.connectionPool = connectionPool;
+    }
+
+    public int createBook(Book book) throws SQLException  {
+        try (Connection connection = connectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO books (name, author, book_year) VALUES (?,?,?)");
             statement.setString(1, book.getName());
@@ -18,9 +26,9 @@ public class BookDao {
         }
     }
 
-    public List<Book> getBookList() throws SQLException, ClassNotFoundException {
+    public List<Book> getBookList() throws SQLException {
         final List<Book> books=new ArrayList<>();
-        try (Connection connection=DaoFactory.getConnection()){
+        try (Connection connection=connectionPool.getConnection()){
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(
                     "SELECT name, author, book_year FROM books");
