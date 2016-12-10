@@ -58,7 +58,18 @@ public class UserDaoTest {
 
     @Test
     public void getUserListByName() throws Exception {
-        List<User> users=userDao.getByName("user");
+        List<User> users=userDao.getUsersByName("user");
         assertEquals(users.size(),2);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void removeUserById() throws Exception {
+        userDao.removeUser(1);
+        userDao.getById(1);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void removeUserByWrongId() throws Exception {
+        userDao.removeUser(9000);
     }
 }
