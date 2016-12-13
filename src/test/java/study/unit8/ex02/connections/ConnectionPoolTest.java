@@ -1,7 +1,6 @@
 package study.unit8.ex02.connections;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.sql.Connection;

@@ -18,7 +18,7 @@ public class BookDao {
     public int createBook(Book book) throws SQLException  {
         try (Connection connection = connectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO books (book_id,name, author, book_year) VALUES (?,?,?,?)");
+                    "INSERT INTO library.books (book_id,name, author, book_year) VALUES (?,?,?,?)");
             statement.setInt(1, book.getId());
             statement.setString(2, book.getName());
             statement.setString(3, book.getAuthor());
@@ -32,7 +32,7 @@ public class BookDao {
         try (Connection connection=connectionPool.getConnection()){
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(
-                    "SELECT name, author, book_year FROM books");
+                    "SELECT name, author, book_year FROM library.books");
             while(result.next()){
                 books.add(new Book(1, result.getString(1),result.getString(2),result.getInt(3)));
             }

@@ -21,7 +21,7 @@ public class UserDao {
     public int createUser(User user) throws SQLException {
         try (Connection connection = connectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO users (user_id,name, phone) VALUES (?,?,?)");
+                    "INSERT INTO library.users (user_id,name, phone) VALUES (?,?,?)");
             statement.setInt(1, user.getId());
             statement.setString(2, user.getName());
             statement.setString(3, user.getPhone());
@@ -34,7 +34,7 @@ public class UserDao {
         try (Connection connection = connectionPool.getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(
-                    "SELECT user_id, name, phone FROM users");
+                    "SELECT user_id, name, phone FROM library.users");
             while (result.next()) {
                 users.add(getUserFromResult(result));
             }
@@ -45,7 +45,7 @@ public class UserDao {
     public User getById(int id) throws SQLException {
         try (Connection connection = connectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT user_id, name, phone FROM users WHERE user_id=?;");
+                    "SELECT user_id, name, phone FROM library.users WHERE user_id=?;");
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
@@ -58,7 +58,7 @@ public class UserDao {
         final List<User> users = new ArrayList<>();
         try (Connection connection = connectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT user_id, name, phone FROM users WHERE LOWER(name) LIKE LOWER(?);");
+                    "SELECT user_id, name, phone FROM library.users WHERE LOWER(name) LIKE LOWER(?);");
             statement.setString(1, "%" + userName + "%");
             ResultSet result = statement.executeQuery();
             while (result.next()) {
@@ -71,7 +71,7 @@ public class UserDao {
     public void removeUser(int id) throws SQLException {
         try (Connection connection = connectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
-                    "DELETE FROM users WHERE user_id=?;");
+                    "DELETE FROM library.users WHERE user_id=?;");
             statement.setInt(1, id);
             int result = statement.executeUpdate();
             if (result == 0) throw new RuntimeException("wrong user id");

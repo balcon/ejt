@@ -16,6 +16,10 @@ public class MyConnection implements Connection {
         this.connectionPool = connectionPool;
     }
 
+    public void realClose() throws SQLException {
+        realConnection.close();
+    }
+
     public void close() throws SQLException {
         connectionPool.releaseConnection(this);
     }

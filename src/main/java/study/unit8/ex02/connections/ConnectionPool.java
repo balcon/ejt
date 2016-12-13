@@ -23,7 +23,7 @@ public class ConnectionPool {
         realConnections = new ArrayList<>(capacity);
 
         for (int i = 0; i < capacity; i++) {
-            Connection connection = DriverManager.getConnection("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
+            Connection connection = DriverManager.getConnection("jdbc:h2:mem:test;MODE=MYSQL;DB_CLOSE_DELAY=-1");
             realConnections.add(connection);
             freeConnections.add(
                     new MyConnection(
@@ -47,8 +47,11 @@ public class ConnectionPool {
     }
 
     public void closeAll() throws SQLException {
-        for (Connection connection : realConnections) {
-            connection.close();
+        for (Connection connection : usedConnections) {
+             ((MyConnection)connection).realClose();
+        }
+        for (Connection connection : freeConnections) {
+             ((MyConnection)connection).realClose();
         }
     }
 }
