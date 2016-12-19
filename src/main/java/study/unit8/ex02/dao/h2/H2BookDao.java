@@ -6,7 +6,6 @@ import study.unit8.ex02.connections.ConnectionPool;
 import study.unit8.ex02.dao.AuthorDao;
 import study.unit8.ex02.dao.BookDao;
 import study.unit8.ex02.dao.DaoException;
-import study.unit8.ex02.dao.DaoFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -49,7 +48,27 @@ public class H2BookDao implements BookDao {
                 books.add(new Book(result.getInt(1), result.getString(2), author));
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't get book list",e);
+            throw new DaoException("Can't get book list", e);
+        }
+        return books;
+    }
+
+// or..
+
+
+    public List<Book> getList2() {
+        final List<Book> books = new ArrayList<>();
+        try (Connection connection = connectionPool.getConnection()) {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(
+                    "SELECT book_id, name, author_id FROM library.books");
+            AuthorDao authorDao=new H2AuthorDao(connectionPool);
+            while (result.next()) {
+                Author author = authorDao.getById(result.getInt(3));
+                books.add(new Book(result.getInt(1), result.getString(2), author));
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Can't get book list", e);
         }
         return books;
     }
@@ -68,7 +87,7 @@ public class H2BookDao implements BookDao {
                 return book;
             } else throw new DaoException("Wrong book id");
         } catch (SQLException e) {
-            throw new DaoException("Can't get book",e);
+            throw new DaoException("Can't get book", e);
         }
     }
 }
