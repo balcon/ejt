@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-public class MyConnection implements Connection {
+public class DBConnection implements Connection {
 
     private final Connection realConnection;
     private final ConnectionPool connectionPool;
 
-    public MyConnection(Connection realConnection, ConnectionPool connectionPool) {
+    public DBConnection(Connection realConnection, ConnectionPool connectionPool) {
         this.realConnection = realConnection;
         this.connectionPool = connectionPool;
     }
