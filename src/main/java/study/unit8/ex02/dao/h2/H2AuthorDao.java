@@ -12,7 +12,7 @@ import java.util.List;
 class H2AuthorDao implements AuthorDao {
     private ConnectionPool connectionPool;
 
-    public H2AuthorDao(ConnectionPool connectionPool) {
+    H2AuthorDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
 
@@ -24,10 +24,10 @@ class H2AuthorDao implements AuthorDao {
             statement.setString(1, name);
             statement.execute();
             ResultSet generatedKeys = statement.getGeneratedKeys();
-            int authorId=0;
-            if(generatedKeys.next()) authorId=generatedKeys.getInt(1);
-            return new Author(authorId,name);
-        } catch (SQLException e){
+            int authorId = 0;
+            if (generatedKeys.next()) authorId = generatedKeys.getInt(1);
+            return new Author(authorId, name);
+        } catch (SQLException e) {
             throw new DaoException("Can't create new author", e);
         }
     }
@@ -43,7 +43,25 @@ class H2AuthorDao implements AuthorDao {
                 authors.add(new Author(result.getInt(1), result.getString(2)));
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't get author list",e);
+            throw new DaoException("Can't get author list", e);
+        }
+        return authors;
+    }
+
+    @Override
+    public List<Author> getListByName(String name) {
+        List<Author> authors = new ArrayList<>();
+        try (Connection connection = connectionPool.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT author_id, name FROM library.authors " +
+                            "WHERE LOWER(name) LIKE LOWER(?);");
+            statement.setString(1, "%" + name + "%");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                authors.add(new Author(result.getInt(1), result.getString(2)));
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Can't get author list", e);
         }
         return authors;
     }
@@ -59,7 +77,7 @@ class H2AuthorDao implements AuthorDao {
                 return new Author(result.getInt(1), result.getString(2));
             } else throw new DaoException("Wrong author ID");
         } catch (SQLException e) {
-            throw new DaoException("Can't get author",e);
+            throw new DaoException("Can't get author", e);
         }
     }
 }

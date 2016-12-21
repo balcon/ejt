@@ -6,19 +6,21 @@ import study.unit8.ex02.dao.BookDao;
 import study.unit8.ex02.dao.DaoFactory;
 import study.unit8.ex02.dao.UserDao;
 
+import java.sql.SQLException;
+
 class H2DaoFactory implements DaoFactory {
 
     private final ConnectionPool connectionPool;
 
-    public H2DaoFactory(ConnectionPool connectionPool) {
+    H2DaoFactory(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
 
-    public BookDao getBookDao() {
+    public BookDao getBookDao(){
         return new H2BookDao(connectionPool);
     }
 
-    public UserDao getUserDao() {
+    public UserDao getUserDao(){
         return new H2UserDao(connectionPool);
     }
 

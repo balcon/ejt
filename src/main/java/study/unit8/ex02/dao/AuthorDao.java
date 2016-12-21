@@ -9,5 +9,7 @@ public interface AuthorDao {
 
     List<Author> getList();
 
+    List<Author> getListByName(String name);
+
     Author getById(int i);
 }

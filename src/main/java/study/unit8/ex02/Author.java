@@ -1,5 +1,8 @@
 package study.unit8.ex02;
 
+import lombok.ToString;
+
+@ToString
 public class Author {
     private final int id;
     private final String name;
