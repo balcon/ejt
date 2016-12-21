@@ -17,8 +17,17 @@ class H2BookDao implements BookDao {
         this.connectionPool = connectionPool;
     }
 
-    public Book create(String name) {
+    @Override
+    public Book create(String name, Author author) {
+        List<Author> authors = new ArrayList<>();
+        authors.add(author);
+        return create(name, authors);
+    }
+
+    @Override
+    public Book create(String name, List<Author> authors) {
         try (Connection connection = connectionPool.getConnection()) {
+            connection.setAutoCommit(false);
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO library.books (name) VALUES (?)");
             statement.setString(1, name);
@@ -27,7 +36,15 @@ class H2BookDao implements BookDao {
             int bookId = 0;
             if (generatedKeys.next())
                 bookId = generatedKeys.getInt(1);
-            return new Book(bookId, name);
+            PreparedStatement statementBoksAuthors = connection.prepareStatement(
+                    "INSERT INTO library.books_authors (book_id,author_id) VALUES (?,?)");
+            for (Author author : authors) {
+                statementBoksAuthors.setInt(1, bookId);
+                statementBoksAuthors.setInt(2, author.getId());
+                statement.execute();
+            }
+            connection.commit();
+            return new Book(bookId, name, authors);
         } catch (SQLException e) {
             throw new DaoException("Can't create new book", e);
         }
@@ -75,7 +92,7 @@ class H2BookDao implements BookDao {
                     authors.add(new Author(resultAuthors.getInt(1), resultAuthors.getString(2)));
                 }
                 return new Book(result.getInt(1), result.getString(2), authors);
-            } else throw new DaoException("Wrong book id");
+            } else throw new DaoException("Wrong book ID");
         } catch (SQLException e) {
             throw new DaoException("Can't get book", e);
         }

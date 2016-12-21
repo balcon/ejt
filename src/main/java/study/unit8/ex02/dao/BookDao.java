@@ -6,7 +6,9 @@ import study.unit8.ex02.Book;
 import java.util.List;
 
 public interface BookDao {
-    Book create(String name);
+    Book create(String name, Author author);
+
+    Book create(String name, List<Author> authors);
 
     List<Book> getList();
 

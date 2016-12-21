@@ -17,11 +17,28 @@ import static org.junit.Assert.assertTrue;
 public class H2BookDaoTest extends H2DaoTests {
 
     @Test
-    public void createBook() throws Exception {
-        String bookName = "Name";
-        Book book = bookDao.create(bookName);
+    public void createBookWithSingleAuthor() throws Exception {
+        Author author = authorDao.getById(2);
+        String bookName = "Name1";
+
+        Book book = bookDao.create(bookName,author);
 
         assertEquals(book.getName(), bookName);
+        assertEquals(book.getAuthors().get(0).getId(),2);
+    }
+
+    @Test
+    public void createBookWithManyAuthors() throws Exception {
+        List<Author> authors = new ArrayList<>();
+        authors.add(authorDao.getById(1));
+        authors.add(authorDao.getById(2));
+        String bookName = "Name2";
+
+        Book book=bookDao.create(bookName,authors);
+
+        assertEquals(book.getName(),bookName);
+        assertEquals(book.getAuthors().size(),2);
+
     }
 
     @Test
