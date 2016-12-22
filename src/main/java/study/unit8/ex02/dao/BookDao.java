@@ -17,4 +17,6 @@ public interface BookDao {
     List<Book> getListByName(String name);
 
     Book getById(int id);
+
+    void removeById(int id);
 }

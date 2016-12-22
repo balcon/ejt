@@ -41,7 +41,7 @@ class H2BookDao implements BookDao {
             for (Author author : authors) {
                 statementBoksAuthors.setInt(1, bookId);
                 statementBoksAuthors.setInt(2, author.getId());
-                statement.execute();
+                statementBoksAuthors.execute();
             }
             connection.commit();
             return new Book(bookId, name, authors);
@@ -95,6 +95,26 @@ class H2BookDao implements BookDao {
             } else throw new DaoException("Wrong book ID");
         } catch (SQLException e) {
             throw new DaoException("Can't get book", e);
+        }
+    }
+
+    @Override
+    public void removeById(int id) {
+        try (Connection connection = connectionPool.getConnection()) {
+            //todo check current user
+            connection.setAutoCommit(false);
+            PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM library.books WHERE book_id=?;");
+            statement.setInt(1, id);
+            int result = statement.executeUpdate();
+            if (result == 0)
+                throw new DaoException("Wrong book ID");
+            statement = connection.prepareStatement(
+                    "DELETE FROM library.books_authors WHERE book_id=?;");
+            statement.setInt(1, id);
+            statement.execute();
+        } catch (SQLException e) {
+            throw new DaoException("Can't remove book", e);
         }
     }
 
